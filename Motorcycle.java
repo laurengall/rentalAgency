@@ -1,0 +1,3 @@
+class Motorcycle extends Vehicle {
+  
+}
