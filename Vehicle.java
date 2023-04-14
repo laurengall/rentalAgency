@@ -60,4 +60,8 @@ public class Vehicle {
   public void setColor(String color) {
     this.color = color;
   }
+
+  public static void printVehicleInfo(String color, int year, String make, String model) {
+    System.out.println(color + " " + year + " " + make + " " + model);
+  }
 }
