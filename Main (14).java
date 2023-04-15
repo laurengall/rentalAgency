@@ -1,6 +1,6 @@
 class Main {
   public static void main(String[] args) {
-    Vehicle v001 = new Vehicle("Ford", "Explorer", 2020, 4, "Black");
-    v001.getColor();
+    // Car v001 = new Car("Ford", "Explorer", 2020, 4, "Black", 50.0);
+
   }
 }

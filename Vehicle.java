@@ -4,6 +4,7 @@ class Vehicle {
   private int year;
   private int numWheels;
   private String color;
+  private double ppd;
 
   public Vehicle() {
     make = "";
@@ -11,14 +12,16 @@ class Vehicle {
     year = 0;
     numWheels = 0;
     color = "";
+    ppd = 0.0;
   }
 
-  public Vehicle(String ma, String mo, int y, int nW, String c) {
+  public Vehicle(String ma, String mo, int y, int nW, String c, double p) {
     make = ma;
     model = mo;
     year = y;
     numWheels = nW;
     color = c;
+    ppd = p;
   }
 
   public String getMake() {
@@ -59,6 +62,14 @@ class Vehicle {
 
   public void setColor(String color) {
     this.color = color;
+  }
+
+  public double getPpd() {
+    return ppd;
+  }
+
+  public void setPpd(double ppd) {
+    this.ppd = ppd;
   }
 
   public static void printVehicleInfo(String color, int year, String make, String model) {
