@@ -1,4 +1,4 @@
-public class Vehicle {
+class Vehicle {
   private String make;
   private String model;
   private int year;
@@ -6,11 +6,11 @@ public class Vehicle {
   private String color;
 
   public Vehicle() {
-    this.make = make;
-    this.model = model;
-    this.year = year;
-    this.numWheels = numWheels;
-    this.color = color;
+    make = "";
+    model = "";
+    year = 0;
+    numWheels = 0;
+    color = "";
   }
 
   public Vehicle(String ma, String mo, int y, int nW, String c) {
