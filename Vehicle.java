@@ -8,7 +8,6 @@ class Vehicle {
   private String color;
   private double ppd;
   private int vin;
-  private ArrayList<Vehicle> list = new ArrayList<Vehicle>();
 
   public Vehicle() {
     make = "";
@@ -18,10 +17,9 @@ class Vehicle {
     color = "";
     ppd = 0.0;
     vin = 0;
-    list = null;
   }
 
-  public Vehicle(String ma, String mo, int y, int nW, String c, double p, int v, ArrayList<Vehicle> l) {
+  public Vehicle(String ma, String mo, int y, int nW, String c, double p, int v) {
     make = ma;
     model = mo;
     year = y;
@@ -29,7 +27,6 @@ class Vehicle {
     color = c;
     ppd = p;
     vin = v;
-    list = l;
   }
 
   public String getMake() {
@@ -86,14 +83,6 @@ class Vehicle {
 
   public void setVin(int vin) {
     this.vin = vin;
-  }
-
-  public ArrayList getList() {
-    return list;
-  }
-
-  public void setList() {
-    this.list = list;
   }
 
   public static void printVehicleInfo(String color, int year, String make, String model) {
