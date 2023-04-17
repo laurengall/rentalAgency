@@ -21,6 +21,9 @@ class Main {
     for (Vehicle v : list) {
       if (tempVin == v.getVin()) {
         System.out.println("Vehicle found.");
+        // print vehicle info
+      } else {
+        System.out.println("Sorry, no vehicle with that Vin # was found.");
       }
     }
   }
