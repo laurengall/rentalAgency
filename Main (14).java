@@ -75,30 +75,21 @@ class Main {
 
   }
 
-  /*
-   * private String make;
-   * private String model;
-   * private int year;
-   * private int numWheels;
-   * private String color;
-   * private double ppd;
-   * private int vin;
-   */
   public static void addVehicle(Scanner input, ArrayList<Vehicle> list) {
     System.out.println("What type of vehicle will you be adding?");
     System.out.println("1. Car\n2. Truck\n3. Motorcycle");
     int num = input.nextInt();
     if (num == 1) {
       Car c = new Car();
-      getInfo(input, c);
+      getInfo(input, c, list);
       list.add(c);
     } else if (num == 2) {
       Truck t = new Truck();
-      getInfo(input, t);
+      getInfo(input, t, list);
       list.add(t);
     } else if (num == 3) {
       Motorcycle m = new Motorcycle();
-      getInfo(input, m);
+      getInfo(input, m, list);
       list.add(m);
     } else {
       System.out.println("What type of vehicle will you be adding?");
@@ -107,7 +98,7 @@ class Main {
     }
   }
 
-  public static Vehicle getInfo(Scanner input, Vehicle v) {
+  public static void getInfo(Scanner input, Vehicle v, ArrayList<Vehicle> list) {
     System.out.println("Enter model name: ");
     String mod = input.nextLine();
     v.setModel(mod);
@@ -126,6 +117,6 @@ class Main {
     System.out.println("Enter vin number: ");
     int vinNum = input.nextInt();
     v.setVin(vinNum);
-    return v;
+    list.add(v);
   }
 }
