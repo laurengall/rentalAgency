@@ -36,7 +36,7 @@ class Main {
         editCust();
         break;
       case 7:
-        addVehicle();
+        addVehicle(input, list);
         break;
       default:
         break;
@@ -75,7 +75,57 @@ class Main {
 
   }
 
-  public static void addVehicle() {
+  /*
+   * private String make;
+   * private String model;
+   * private int year;
+   * private int numWheels;
+   * private String color;
+   * private double ppd;
+   * private int vin;
+   */
+  public static void addVehicle(Scanner input, ArrayList<Vehicle> list) {
+    System.out.println("What type of vehicle will you be adding?");
+    System.out.println("1. Car\n2. Truck\n3. Motorcycle");
+    int num = input.nextInt();
+    if (num == 1) {
+      Car c = new Car();
+      getInfo(input, c);
+      list.add(c);
+    } else if (num == 2) {
+      Truck t = new Truck();
+      getInfo(input, t);
+      list.add(t);
+    } else if (num == 3) {
+      Motorcycle m = new Motorcycle();
+      getInfo(input, m);
+      list.add(m);
+    } else {
+      System.out.println("What type of vehicle will you be adding?");
+      System.out.println("1. Car\n2. Truck\n3. Motorcycle");
+      num = input.nextInt();
+    }
+  }
 
+  public static Vehicle getInfo(Scanner input, Vehicle v) {
+    System.out.println("Enter model name: ");
+    String mod = input.nextLine();
+    v.setModel(mod);
+    System.out.println("Enter year of manufacture: ");
+    int yea = input.nextInt();
+    v.setYear(yea);
+    System.out.println("Enter year of number of wheels: ");
+    int nW = input.nextInt();
+    v.setNumWheels(nW);
+    System.out.println("Enter color name: ");
+    String col = input.nextLine();
+    v.setColor(col);
+    System.out.println("Enter price per day: ");
+    double price = input.nextDouble();
+    v.setPpd(price);
+    System.out.println("Enter vin number: ");
+    int vinNum = input.nextInt();
+    v.setVin(vinNum);
+    return v;
   }
 }
