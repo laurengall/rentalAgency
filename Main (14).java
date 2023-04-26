@@ -109,33 +109,24 @@ class Main {
 
   public static void getInfo(Vehicle v, ArrayList<Vehicle> list) {
     Scanner input = new Scanner(System.in);
-    System.out.println("Enter make name: ");
-    String mak = "";
-    mak = input.nextLine();
+    System.out.println("Enter make: ");
+    String mak = input.nextLine();
     v.setMake(mak);
-    System.out.println("Enter model name: ");
-    String mod = "";
-    mod = input.nextLine();
+    System.out.println("Enter model: ");
+    String mod = input.nextLine();
     v.setModel(mod);
     System.out.println("Enter year of manufacture: ");
-    int yea = 0;
-    yea = input.nextInt();
+    int yea = input.nextInt();
     v.setYear(yea);
-    System.out.println("Enter year of number of wheels: ");
-    int nW = 0;
-    nW = input.nextInt();
-    v.setNumWheels(nW);
-    System.out.println("Enter color name: ");
-    String col = "";
-    col = input.nextLine();
+    System.out.println("Enter color: ");
+    input.nextLine();
+    String col = input.nextLine();
     v.setColor(col);
     System.out.println("Enter price per day: ");
-    double price = 0.0;
-    price = input.nextDouble();
+    double price = input.nextDouble();
     v.setPpd(price);
     System.out.println("Enter vin number: ");
-    int vinNum = 0;
-    vinNum = input.nextInt();
+    int vinNum = input.nextInt();
     v.setVin(vinNum);
     list.add(v);
   }
