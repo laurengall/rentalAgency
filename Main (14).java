@@ -126,6 +126,6 @@ class Main {
     System.out.println("Enter vin number: ");
     int vinNum = input.nextInt();
     v.setVin(vinNum);
-
+    list.add(v);
   }
 }
