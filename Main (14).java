@@ -91,15 +91,12 @@ class Main {
     if (num == 1) {
       Car c = new Car();
       getInfo(c, list);
-      list.add(c);
     } else if (num == 2) {
       Truck t = new Truck();
       getInfo(t, list);
-      list.add(t);
     } else if (num == 3) {
       Motorcycle m = new Motorcycle();
       getInfo(m, list);
-      list.add(m);
     } else {
       System.out.println("What type of vehicle will you be adding?");
       System.out.println("1. Car\n2. Truck\n3. Motorcycle");
@@ -107,6 +104,7 @@ class Main {
     }
   }
 
+  // gets vehicle information and adds it to the list of Vehicles
   public static void getInfo(Vehicle v, ArrayList<Vehicle> list) {
     Scanner input = new Scanner(System.in);
     System.out.println("Enter make: ");
@@ -128,6 +126,6 @@ class Main {
     System.out.println("Enter vin number: ");
     int vinNum = input.nextInt();
     v.setVin(vinNum);
-    list.add(v);
+
   }
 }
