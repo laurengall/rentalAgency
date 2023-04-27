@@ -11,7 +11,7 @@ class Main {
     System.out.println("Bob's Rental Agency Admin Console. Type a number from the menu to get started.");
     while (running) {
       System.out.println("1. Find Vehicle");
-      System.out.println("2. Calculate Rental Fees");
+      System.out.println("2. Calculate Daily Revenue");
       System.out.println("3. Edit Vehicle Info");
       System.out.println("4. Add Customer");
       System.out.println("5. View Customer Info");
@@ -24,10 +24,10 @@ class Main {
           findVehicle(input, list);
           break;
         case 2:
-          calcFees();
+          calcRev(list);
           break;
         case 3:
-          editVehicle();
+          editVehicle(input, list);
           break;
         case 4:
           addCust();
@@ -39,7 +39,6 @@ class Main {
           editCust();
           break;
         case 7:
-          Vehicle v = new Vehicle();
           addVehicle(input, list);
           break;
         case 8:
@@ -64,12 +63,78 @@ class Main {
     }
   }
 
-  public static void calcFees() {
-
+  public static Vehicle findVehicle2(Scanner input, ArrayList<Vehicle> list) {
+    Vehicle a = new Vehicle();
+    System.out.println("Type in Vin # for the Vehicle: ");
+    int tempVin = input.nextInt();
+    for (Vehicle v : list) {
+      if (tempVin == v.getVin()) {
+        System.out.println("Vehicle found.");
+        return v;
+      } else {
+        System.out.println("Sorry, no vehicle with that Vin # was found.");
+      }
+    }
+    return a;
   }
 
-  public static void editVehicle() {
+  public static void calcRev(ArrayList<Vehicle> list) {
+    double fees = 0.0;
+    for (Vehicle v : list) {
+      fees += v.getPpd();
+    }
+    System.out.println("The total daily revenue is: $" + fees);
+  }
 
+  public static void editVehicle(Scanner input, ArrayList<Vehicle> list) {
+    Vehicle v = findVehicle2(input, list);
+    boolean running = true;
+    while (running) {
+      System.out.println("What would you like to change?");
+      System.out.println("1. Make\n2. Model\n3. Year\n4. Color\n5. Price\n6. Vin Number");
+      input.nextLine();
+      String cmd = input.nextLine();
+      switch (cmd) {
+        case "1":
+          System.out.println("Type the new make: ");
+          cmd = input.nextLine();
+          v.setMake(cmd);
+          break;
+        case "2":
+          System.out.println("Type the new model: ");
+          cmd = input.nextLine();
+          v.setModel(cmd);
+          break;
+        case "3":
+          System.out.println("Type the new year: ");
+          int c = input.nextInt();
+          v.setYear(c);
+          break;
+        case "4":
+          System.out.println("Type the new color: ");
+          cmd = input.nextLine();
+          v.setColor(cmd);
+          break;
+        case "5":
+          System.out.println("Type the new Price: ");
+          c = input.nextInt();
+          v.setPpd(c);
+          break;
+        case "6":
+          System.out.println("Type the new Vin Number: ");
+          c = input.nextInt();
+          v.setVin(c);
+          break;
+        default:
+          break;
+      }
+      System.out.println("Would you like to change anything else?");
+      System.out.println("Type 1 for yes and 2 for no.");
+      int c = input.nextInt();
+      if (c == 2) {
+        running = false;
+      }
+    }
   }
 
   public static void addCust() {
