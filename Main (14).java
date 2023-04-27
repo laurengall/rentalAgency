@@ -57,6 +57,7 @@ class Main {
     for (Vehicle v : list) {
       if (tempVin == v.getVin()) {
         System.out.println("Vehicle found.");
+        printInfo(v);
       } else {
         System.out.println("Sorry, no vehicle with that Vin # was found.");
       }
@@ -70,6 +71,7 @@ class Main {
     for (Vehicle v : list) {
       if (tempVin == v.getVin()) {
         System.out.println("Vehicle found.");
+        printInfo(v);
         return v;
       } else {
         System.out.println("Sorry, no vehicle with that Vin # was found.");
@@ -192,5 +194,14 @@ class Main {
     int vinNum = input.nextInt();
     v.setVin(vinNum);
     list.add(v);
+  }
+
+  public static void printInfo(Vehicle v) {
+    System.out.println("Make: " + v.getMake());
+    System.out.println("Model: " + v.getModel());
+    System.out.println("Year: " + v.getYear());
+    System.out.println("Color: " + v.getColor());
+    System.out.println("Price/day: " + v.getPpd());
+    System.out.println("Vin Number: " + v.getVin());
   }
 }
