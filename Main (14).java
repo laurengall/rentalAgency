@@ -2,9 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 class Main {
-
   public static void main(String[] args) {
-    // Car v001 = new Car("Ford", "Explorer", 2020, 4, "Black", 50.0, 001);
     ArrayList<Vehicle> list = new ArrayList<Vehicle>();
     Scanner input = new Scanner(System.in);
     boolean running = true;
@@ -48,9 +46,9 @@ class Main {
           break;
       }
     }
-
   }
 
+  // finds vehicle based on vin number
   public static void findVehicle(Scanner input, ArrayList<Vehicle> list) {
     System.out.println("Type in Vin # for the Vehicle: ");
     int tempVin = input.nextInt();
@@ -64,6 +62,7 @@ class Main {
     }
   }
 
+  // return vehicle based on vin number for other methods to use
   public static Vehicle findVehicle2(Scanner input, ArrayList<Vehicle> list) {
     Vehicle a = new Vehicle();
     System.out.println("Type in Vin # for the Vehicle: ");
@@ -80,6 +79,7 @@ class Main {
     return a;
   }
 
+  // calculates daily revenue from all vehicles that can be rented out
   public static void calcRev(ArrayList<Vehicle> list) {
     double fees = 0.0;
     for (Vehicle v : list) {
@@ -88,6 +88,7 @@ class Main {
     System.out.println("The total daily revenue is: $" + fees);
   }
 
+  // edits vehicle information
   public static void editVehicle(Scanner input, ArrayList<Vehicle> list) {
     Vehicle v = findVehicle2(input, list);
     boolean running = true;
@@ -196,6 +197,7 @@ class Main {
     list.add(v);
   }
 
+  // prints vehicle information
   public static void printInfo(Vehicle v) {
     System.out.println("Make: " + v.getMake());
     System.out.println("Model: " + v.getModel());
