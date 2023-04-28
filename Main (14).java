@@ -4,6 +4,7 @@ import java.util.ArrayList;
 class Main {
   public static void main(String[] args) {
     ArrayList<Vehicle> list = new ArrayList<Vehicle>();
+    ArrayList<Customer> custs = new ArrayList<Customer>();
     Scanner input = new Scanner(System.in);
     boolean running = true;
     System.out.println("Bob's Rental Agency Admin Console. Type a number from the menu to get started.");
@@ -28,7 +29,7 @@ class Main {
           editVehicle(input, list);
           break;
         case 4:
-          addCust();
+          addCust(input, custs);
           break;
         case 5:
           viewCust();
@@ -140,8 +141,16 @@ class Main {
     }
   }
 
-  public static void addCust() {
-
+  public static void addCust(Scanner input, ArrayList<Customer> custs) {
+    Customer c = new Customer();
+    input.nextLine();
+    System.out.println("Input customer name: ");
+    String nam = input.nextLine();
+    c.setName(nam);
+    System.out.println("Input customer id: ");
+    int iD = input.nextInt();
+    c.setId(iD);
+    custs.add(c);
   }
 
   public static void viewCust() {
