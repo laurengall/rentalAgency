@@ -9,88 +9,68 @@ class Main {
     boolean running = true;
     System.out.println("Bob's Rental Agency Admin Console. Type a number from the menu to get started.");
     while (running) {
-      System.out.println("1. Find Vehicle");
-      System.out.println("2. Calculate Daily Revenue");
-      System.out.println("3. Edit Vehicle Info");
-      System.out.println("4. Add Customer");
-      System.out.println("5. View Customer Info");
-      System.out.println("6. Edit Customer Info");
-      System.out.println("7. Add Vehicle");
-      System.out.println("8. Exit");
-      System.out.println("9. Find Customer");
+      System.out.println("1. Vehicle Console");
+      System.out.println("2. Customer Console");
+      System.out.println("0. Exit");
       int cmd = input.nextInt();
       switch (cmd) {
         case 1:
-          findVehicle(input, list);
+          System.out.println("1. Add Vehicle");
+          System.out.println("2. Edit Vehicle Info");
+          System.out.println("3. Find Vehicle");
+          int cmd2 = input.nextInt();
+          switch (cmd2) {
+            case 1:
+              addVehicle(input, list);
+              break;
+            case 2:
+              editVehicle(input, list);
+              break;
+            case 3:
+              findVehicle(input, list);
+              break;
+          }
           break;
         case 2:
-          calcRev(list);
-          break;
-        case 3:
-          editVehicle(input, list);
-          break;
-        case 4:
-          addCust(input, custs);
-          break;
-        case 5:
-          viewCust();
-          break;
-        case 6:
-          editCust(input, custs);
-          break;
-        case 7:
-          addVehicle(input, list);
-          break;
-        case 8:
-          running = false;
-          break;
-        case 9:
-          findCust(input, custs);
-          break;
-        default:
+          System.out.println("1. Add Customer");
+          System.out.println("2. Edit Customer Info");
+          System.out.println("3. Find Customer");
+          cmd2 = input.nextInt();
+          switch (cmd2) {
+            case 1:
+              addCust(input, custs);
+              break;
+            case 2:
+              editCust(input, custs);
+              break;
+            case 3:
+              findCust(input, custs);
+              break;
+          }
           break;
       }
     }
   }
 
-  // finds vehicle based on vin number
-  public static void findVehicle(Scanner input, ArrayList<Vehicle> list) {
-    System.out.println("Type in Vin # for the Vehicle: ");
-    int tempVin = input.nextInt();
-    for (Vehicle v : list) {
-      if (tempVin == v.getVin()) {
-        System.out.println("Vehicle found.");
-        printInfo(v);
-      } else {
-        System.out.println("Sorry, no vehicle with that Vin # was found.");
-      }
+  // adds a vehicle to the ArrayList list based on type of vehicle
+  public static void addVehicle(Scanner input, ArrayList<Vehicle> list) {
+    System.out.println("What type of vehicle will you be adding?");
+    System.out.println("1. Car\n2. Truck\n3. Motorcycle");
+    int num = input.nextInt();
+    if (num == 1) {
+      Car c = new Car();
+      getInfo(c, list);
+    } else if (num == 2) {
+      Truck t = new Truck();
+      getInfo(t, list);
+    } else if (num == 3) {
+      Motorcycle m = new Motorcycle();
+      getInfo(m, list);
+    } else {
+      System.out.println("What type of vehicle will you be adding?");
+      System.out.println("1. Car\n2. Truck\n3. Motorcycle");
+      num = input.nextInt();
     }
-  }
-
-  // return vehicle based on vin number for other methods to use
-  public static Vehicle findVehicle2(Scanner input, ArrayList<Vehicle> list) {
-    Vehicle a = new Vehicle();
-    System.out.println("Type in Vin # for the Vehicle: ");
-    int tempVin = input.nextInt();
-    for (Vehicle v : list) {
-      if (tempVin == v.getVin()) {
-        System.out.println("Vehicle found.");
-        printInfo(v);
-        return v;
-      } else {
-        System.out.println("Sorry, no vehicle with that Vin # was found.");
-      }
-    }
-    return a;
-  }
-
-  // calculates daily revenue from all vehicles that can be rented out
-  public static void calcRev(ArrayList<Vehicle> list) {
-    double fees = 0.0;
-    for (Vehicle v : list) {
-      fees += v.getPpd();
-    }
-    System.out.println("The total daily revenue is: $" + fees);
   }
 
   // edits vehicle information
@@ -145,6 +125,38 @@ class Main {
     }
   }
 
+  // finds vehicle based on vin number
+  public static void findVehicle(Scanner input, ArrayList<Vehicle> list) {
+    System.out.println("Type in Vin # for the Vehicle: ");
+    int tempVin = input.nextInt();
+    for (Vehicle v : list) {
+      if (tempVin == v.getVin()) {
+        System.out.println("Vehicle found.");
+        printInfo(v);
+      } else {
+        System.out.println("Sorry, no vehicle with that Vin # was found.");
+      }
+    }
+  }
+
+  // return vehicle based on vin number for other methods to use
+  public static Vehicle findVehicle2(Scanner input, ArrayList<Vehicle> list) {
+    Vehicle a = new Vehicle();
+    System.out.println("Type in Vin # for the Vehicle: ");
+    int tempVin = input.nextInt();
+    for (Vehicle v : list) {
+      if (tempVin == v.getVin()) {
+        System.out.println("Vehicle found.");
+        printInfo(v);
+        return v;
+      } else {
+        System.out.println("Sorry, no vehicle with that Vin # was found.");
+      }
+    }
+    return a;
+  }
+
+  // adds a customer to the ArrayList custs
   public static void addCust(Scanner input, ArrayList<Customer> custs) {
     Customer c = new Customer();
     input.nextLine();
@@ -157,51 +169,7 @@ class Main {
     custs.add(c);
   }
 
-  public static void printCustInfo(Customer c) {
-    System.out.println("Customer Name: " + c.getName());
-    System.out.println("Customer ID : " + c.getId());
-    int count = 1;
-    if (c.getRentals() != null) {
-      for (Vehicle v : c.getRentals()) {
-        System.out.println("Rental #" + count + ":");
-        printInfo(v);
-      }
-    }
-  }
-
-  public static void findCust(Scanner input, ArrayList<Customer> custs) {
-    System.out.println("Type in Customer ID: ");
-    int tempID = input.nextInt();
-    for (Customer c : custs) {
-      if (tempID == c.getId()) {
-        System.out.println("Customer found.");
-        printCustInfo(c);
-      } else {
-        System.out.println("Sorry, no customer with that ID was found.");
-      }
-    }
-  }
-
-  public static Customer findCust2(Scanner input, ArrayList<Customer> custs) {
-    Customer a = new Customer();
-    System.out.println("Type in Customer ID: ");
-    int tempID = input.nextInt();
-    for (Customer c : custs) {
-      if (tempID == c.getId()) {
-        System.out.println("Customer found.");
-        printCustInfo(c);
-        return c;
-      } else {
-        System.out.println("Sorry, no customer with that ID was found.");
-      }
-    }
-    return a;
-  }
-
-  public static void viewCust() {
-
-  }
-
+  // edits customer information
   public static void editCust(Scanner input, ArrayList<Customer> custs) {
     Customer c = findCust2(input, custs);
     boolean running = true;
@@ -256,6 +224,38 @@ class Main {
     }
   }
 
+  // finds a customer based on id number
+  public static void findCust(Scanner input, ArrayList<Customer> custs) {
+    System.out.println("Type in Customer ID: ");
+    int tempID = input.nextInt();
+    for (Customer c : custs) {
+      if (tempID == c.getId()) {
+        System.out.println("Customer found.");
+        printCustInfo(c);
+      } else {
+        System.out.println("Sorry, no customer with that ID was found.");
+      }
+    }
+  }
+
+  // finds a customer based on id for other methods to use
+  public static Customer findCust2(Scanner input, ArrayList<Customer> custs) {
+    Customer a = new Customer();
+    System.out.println("Type in Customer ID: ");
+    int tempID = input.nextInt();
+    for (Customer c : custs) {
+      if (tempID == c.getId()) {
+        System.out.println("Customer found.");
+        printCustInfo(c);
+        return c;
+      } else {
+        System.out.println("Sorry, no customer with that ID was found.");
+      }
+    }
+    return a;
+  }
+
+  // edits a vehicle being rented by a customer
   public static void editCustVehicle(Scanner input, Vehicle v) {
     boolean running = true;
     while (running) {
@@ -306,26 +306,6 @@ class Main {
     }
   }
 
-  public static void addVehicle(Scanner input, ArrayList<Vehicle> list) {
-    System.out.println("What type of vehicle will you be adding?");
-    System.out.println("1. Car\n2. Truck\n3. Motorcycle");
-    int num = input.nextInt();
-    if (num == 1) {
-      Car c = new Car();
-      getInfo(c, list);
-    } else if (num == 2) {
-      Truck t = new Truck();
-      getInfo(t, list);
-    } else if (num == 3) {
-      Motorcycle m = new Motorcycle();
-      getInfo(m, list);
-    } else {
-      System.out.println("What type of vehicle will you be adding?");
-      System.out.println("1. Car\n2. Truck\n3. Motorcycle");
-      num = input.nextInt();
-    }
-  }
-
   // gets vehicle information and adds it to the list of Vehicles
   public static void getInfo(Vehicle v, ArrayList<Vehicle> list) {
     Scanner input = new Scanner(System.in);
@@ -360,4 +340,18 @@ class Main {
     System.out.println("Price/day: " + v.getPpd());
     System.out.println("Vin Number: " + v.getVin());
   }
+
+  // prints customer information
+  public static void printCustInfo(Customer c) {
+    System.out.println("Customer Name: " + c.getName());
+    System.out.println("Customer ID : " + c.getId());
+    int count = 1;
+    if (c.getRentals() != null) {
+      for (Vehicle v : c.getRentals()) {
+        System.out.println("Rental #" + count + ":");
+        printInfo(v);
+      }
+    }
+  }
+
 }
