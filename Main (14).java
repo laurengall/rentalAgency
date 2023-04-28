@@ -17,6 +17,7 @@ class Main {
       System.out.println("6. Edit Customer Info");
       System.out.println("7. Add Vehicle");
       System.out.println("8. Exit");
+      System.out.println("9. Find Customer");
       int cmd = input.nextInt();
       switch (cmd) {
         case 1:
@@ -42,6 +43,9 @@ class Main {
           break;
         case 8:
           running = false;
+          break;
+        case 9:
+          findCust(input, custs);
           break;
         default:
           break;
@@ -151,6 +155,31 @@ class Main {
     int iD = input.nextInt();
     c.setId(iD);
     custs.add(c);
+  }
+
+  public static void printCustInfo(Customer c) {
+    System.out.println("Customer Name: " + c.getName());
+    System.out.println("Customer ID : " + c.getId());
+    int count = 1;
+    if (c.getRentals() != null) {
+      for (Vehicle v : c.getRentals()) {
+        System.out.println("Rental #" + count + ":");
+        printInfo(v);
+      }
+    }
+  }
+
+  public static void findCust(Scanner input, ArrayList<Customer> custs) {
+    System.out.println("Type in Customer ID: ");
+    int tempID = input.nextInt();
+    for (Customer c : custs) {
+      if (tempID == c.getId()) {
+        System.out.println("Customer found.");
+        printCustInfo(c);
+      } else {
+        System.out.println("Sorry, no customer with that ID was found.");
+      }
+    }
   }
 
   public static void viewCust() {
