@@ -36,7 +36,7 @@ class Main {
           viewCust();
           break;
         case 6:
-          editCust();
+          editCust(input, custs);
           break;
         case 7:
           addVehicle(input, list);
@@ -182,12 +182,128 @@ class Main {
     }
   }
 
+  public static Customer findCust2(Scanner input, ArrayList<Customer> custs) {
+    Customer a = new Customer();
+    System.out.println("Type in Customer ID: ");
+    int tempID = input.nextInt();
+    for (Customer c : custs) {
+      if (tempID == c.getId()) {
+        System.out.println("Customer found.");
+        printCustInfo(c);
+        return c;
+      } else {
+        System.out.println("Sorry, no customer with that ID was found.");
+      }
+    }
+    return a;
+  }
+
   public static void viewCust() {
 
   }
 
-  public static void editCust() {
+  public static void editCust(Scanner input, ArrayList<Customer> custs) {
+    Customer c = findCust2(input, custs);
+    boolean running = true;
+    while (running) {
+      System.out.println("What would you like to change?");
+      System.out.println("1. Name\n2. ID\n3. Current Rentals");
+      input.nextLine();
+      String cmd = input.nextLine();
+      switch (cmd) {
+        case "1":
+          System.out.println("Input updated customer name: ");
+          cmd = input.nextLine();
+          c.setName(cmd);
+          break;
+        case "2":
+          System.out.println("Input updated customer ID: ");
+          int a = input.nextInt();
+          c.setId(a);
+          break;
+        case "3":
+          System.out.println("Update list of rental cars: ");
+          int count = 1;
+          if (c.getRentals() != null) {
+            for (Vehicle v : c.getRentals()) {
+              System.out.println("Rental #" + count + ":");
+              printInfo(v);
+            }
+            System.out.println("Which car would you like to edit? Type the number from the list.");
+            int chng = input.nextInt();
+            Vehicle ve = c.getRentals().get(chng);
+            printInfo(ve);
+            System.out.println("Is this the vehicle you would like to edit? Type 1 for yes and 2 for no.");
+            int go = input.nextInt();
+            if (go == 2) {
+              System.out.println("Which car would you like to edit? Type the number from the list.");
+              chng = input.nextInt();
+              ve = c.getRentals().get(chng);
+              printInfo(ve);
+            }
+            editCustVehicle(input, ve);
+          }
+          break;
+        default:
+          break;
+      }
+      System.out.println("Would you like to change anything else?");
+      System.out.println("Type 1 for yes and 2 for no.");
+      int a = input.nextInt();
+      if (a == 2) {
+        running = false;
+      }
+    }
+  }
 
+  public static void editCustVehicle(Scanner input, Vehicle v) {
+    boolean running = true;
+    while (running) {
+      System.out.println("What would you like to change?");
+      System.out.println("1. Make\n2. Model\n3. Year\n4. Color\n5. Price\n6. Vin Number");
+      input.nextLine();
+      String cmd = input.nextLine();
+      switch (cmd) {
+        case "1":
+          System.out.println("Type the new make: ");
+          cmd = input.nextLine();
+          v.setMake(cmd);
+          break;
+        case "2":
+          System.out.println("Type the new model: ");
+          cmd = input.nextLine();
+          v.setModel(cmd);
+          break;
+        case "3":
+          System.out.println("Type the new year: ");
+          int c = input.nextInt();
+          v.setYear(c);
+          break;
+        case "4":
+          System.out.println("Type the new color: ");
+          cmd = input.nextLine();
+          v.setColor(cmd);
+          break;
+        case "5":
+          System.out.println("Type the new Price: ");
+          c = input.nextInt();
+          v.setPpd(c);
+          break;
+        case "6":
+          System.out.println("Type the new Vin Number: ");
+          c = input.nextInt();
+          v.setVin(c);
+          break;
+        default:
+          break;
+      }
+      System.out.println("Would you like to change anything else?");
+      System.out.println("Type 1 for yes and 2 for no.");
+      int c = input.nextInt();
+      if (c == 2) {
+        running = false;
+      }
+    }
   }
 
   public static void addVehicle(Scanner input, ArrayList<Vehicle> list) {
