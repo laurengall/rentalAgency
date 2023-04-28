@@ -5,8 +5,8 @@ class Car extends Vehicle {
 
     }
 
-    public Car(String make, String model, int year, int numWheels, String color, double ppd, int vin) {
-        super(make, model, year, numWheels, color, ppd, vin);
+    public Car(String make, String model, int year, int numWheels, String color, double ppd, int vin, boolean free) {
+        super(make, model, year, numWheels, color, ppd, vin, free);
         numWheels = 4;
     }
 
